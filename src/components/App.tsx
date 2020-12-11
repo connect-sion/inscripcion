@@ -1,22 +1,36 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import { database, DbContext } from '../utils/hooks';
+import Home from '../views/Home';
+import Booking from '../views/Booking';
+import User from '../views/User';
+import Cancel from '../views/Cancel';
+import Verify from '../views/Verify';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DbContext.Provider value={database}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Route path="/booking">
+            <Booking />
+          </Route>
+          <Route path="/user">
+            <User />
+          </Route>
+          <Route path="/cancel">
+            <Cancel />
+          </Route>
+          <Route path="/verify">
+            <Verify />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </DbContext.Provider>
   );
 }
 
