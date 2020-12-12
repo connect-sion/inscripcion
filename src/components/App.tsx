@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { database, DbContext } from '../utils/hooks';
+import { database, DbContext } from '../hooks/useDbContext';
 import Home from '../views/Home';
 import Booking from '../views/Booking';
 import User from '../views/User';

@@ -2,7 +2,9 @@ import { createContext, useContext } from 'react';
 import firebase from 'firebase';
 
 interface DbContextType {
-  db?: firebase.firestore.Firestore;
+  user: firebase.firestore.CollectionReference;
+  church: firebase.firestore.CollectionReference;
+  place: firebase.firestore.CollectionReference;
 }
 
 const firebaseConfig = {
@@ -18,6 +20,11 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-export const database = { db: firebase.firestore() };
+const db = firebase.firestore();
+export const database = {
+  user: db.collection('user'),
+  church: db.collection('church'),
+  place: db.collection('place'),
+};
 export const DbContext = createContext<DbContextType>(database);
 export const useDbContext = () => useContext(DbContext);
