@@ -3,6 +3,9 @@ interface Translations {
   title: string;
   langs: string;
   churches: string;
+  booking: string;
+  verify: string;
+  cancel: string;
 }
 
 export const es: Translations = {
@@ -10,4 +13,7 @@ export const es: Translations = {
   title: 'Sistema de reserva para iglesias en Suiza',
   langs: 'Idiomas',
   churches: 'Iglesias',
+  booking: 'Reservar',
+  verify: 'Verificar',
+  cancel: 'Cancelar',
 };
