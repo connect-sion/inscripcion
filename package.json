@@ -2,7 +2,7 @@
   "name": "inscripcion",
   "version": "0.1.0",
   "private": true,
-  "home": "https://connect-sion.github.io/inscripcion/",
+  "homepage": "https://connect-sion.github.io/inscripcion/",
   "scripts": {
     "build:tailwind": "tailwindcss build src/tailwind.css -o ./public/tailwind.output.css",
     "prestart": "npm run build:tailwind",
