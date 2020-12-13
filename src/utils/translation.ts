@@ -15,6 +15,8 @@ interface Translations {
   userNotFound: string;
   correct: (places: number) => string;
   return: string;
+  confirmDelete: string;
+  deleteCorrect: string;
 }
 
 export const es: Translations = {
@@ -34,4 +36,6 @@ export const es: Translations = {
   userNotFound: 'El teléfono no está registrado para esta fecha',
   correct: (places) => `Tiene separados ${places} puestos para esta fecha`,
   return: 'Regresar',
+  confirmDelete: 'De continuar sus cupos serán liberados',
+  deleteCorrect: 'Los cupos han sido liberados',
 };
