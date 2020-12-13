@@ -6,6 +6,9 @@ interface Translations {
   booking: string;
   verify: string;
   cancel: string;
+  phone: string;
+  companions: string;
+  limit: string;
 }
 
 export const es: Translations = {
@@ -16,4 +19,7 @@ export const es: Translations = {
   booking: 'Reservar',
   verify: 'Verificar',
   cancel: 'Cancelar',
+  phone: 'Número telefonico',
+  companions: 'Número de acompañantes',
+  limit: 'Cupos ocupados en',
 };

@@ -4,9 +4,17 @@ import { Select } from './form/Select';
 
 import { useDbContext } from '../hooks/useDbContext';
 import * as texts from '../utils/translation';
-import { capitalize, optionsFromObj } from '../utils/utils';
+import {
+  capitalize,
+  getChurch,
+  getLang,
+  optionsFromObj,
+  setChurch,
+  setLang,
+} from '../utils/utils';
 
 interface LayoutProps {
+  subtitle?: string;
   children: ReactNode | ReactNode[];
 }
 
@@ -18,7 +26,7 @@ const langs: Record<string, string> = {
   de: 'Deutch',
   it: 'Italiano',
 };
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ subtitle, children }: LayoutProps) {
   // Query for churches to backend
   const { church } = useDbContext();
   const [churchList, setChurchList] = useState<string[]>([]);
@@ -31,24 +39,20 @@ export default function Layout({ children }: LayoutProps) {
   }, [church]);
 
   // Read church from state
-  const [churchStorage, setChurchStorage] = useState<string>(
-    localStorage.getItem('churchStorage') || 'lausanne',
-  );
+  const [churchStorage, setChurchStorage] = useState<string>(getChurch);
   useEffect(() => {
-    localStorage.setItem('churchStorage', churchStorage);
+    setChurch(churchStorage);
   }, [churchStorage]);
 
   // Read language from state
   const langsOptions = optionsFromObj(langs);
-  const [langStorage, setLangStorage] = useState(
-    localStorage.getItem('langStorage') || 'es',
-  );
+  const [langStorage, setLangStorage] = useState(getLang);
   useEffect(() => {
-    localStorage.setItem('langStorage', langStorage);
+    setLang(langStorage);
   }, [langStorage]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-neutral-50 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         {/* Titles */}
         <div>
@@ -57,9 +61,14 @@ export default function Layout({ children }: LayoutProps) {
             src={process.env.PUBLIC_URL + '/idmji.jpg'}
             alt={texts.es.churchName}
           />
-          <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
+          <h1 className="mt-6 text-3xl font-extrabold text-center text-neutral-900">
             {texts.es.title}
-          </h2>
+          </h1>
+          {subtitle && (
+            <h2 className="mt-4 text-xl font-bold text-center text-neutral-900">
+              {subtitle}
+            </h2>
+          )}
         </div>
 
         {/* General options */}
