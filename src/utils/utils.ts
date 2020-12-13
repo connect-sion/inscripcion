@@ -6,6 +6,20 @@ export function optionsFromObj(obj: Record<string, string>) {
   return options;
 }
 
-export function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function getChurch() {
+  return localStorage.getItem('churchStorage') || 'lausanne';
+}
+export function setChurch(curch: string) {
+  localStorage.setItem('churchStorage', curch);
+}
+
+export function getLang() {
+  return localStorage.getItem('langStorage') || 'es';
+}
+export function setLang(lang: string) {
+  localStorage.setItem('langStorage', lang);
 }

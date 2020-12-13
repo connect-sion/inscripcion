@@ -13,14 +13,17 @@ export default function Home() {
         <Button
           text={texts.es.booking}
           onClick={() => history.push('/booking')}
+          color="primary"
         />
         <Button
           text={texts.es.verify}
           onClick={() => history.push('/verify')}
+          color="success"
         />
         <Button
           text={texts.es.cancel}
           onClick={() => history.push('/cancel')}
+          color="danger"
         />
       </div>
     </Layout>
