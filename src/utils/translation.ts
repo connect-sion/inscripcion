@@ -43,9 +43,9 @@ export const es: Translations = {
 export const pr: Translations = {
   churchName: 'Igreja Ministerial de Jesus Cristo Internacional',
   title: 'Sistema de reservas para igrejas na Suíça',
-  langs: 'línguas',
+  langs: 'Línguas',
   churches: 'Igrejas',
-  booking: 'reserva',
+  booking: 'Reserva',
   verify: 'Verifica',
   cancel: 'Cancelar',
   phone: 'Número de telefone',
