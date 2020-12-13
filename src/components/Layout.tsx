@@ -60,14 +60,14 @@ export default function Layout({ subtitle, children }: LayoutProps) {
           <img
             className="w-auto h-40 mx-auto"
             src={process.env.PUBLIC_URL + '/idmji.jpg'}
-            alt={texts.es.churchName}
+            alt={texts[langStorage].churchName}
           />
           <h1 className="mt-6 text-3xl font-extrabold text-center text-neutral-900">
-            {texts.es.title}
+            {texts[langStorage].title}
           </h1>
           {subtitle && (
             <h2 className="mt-4 text-xl font-bold text-center text-neutral-900">
-              {subtitle}
+              {subtitle(langStorage)}
             </h2>
           )}
         </div>
@@ -76,14 +76,14 @@ export default function Layout({ subtitle, children }: LayoutProps) {
         <div className="flex justify-between">
           <Select
             className="w-48"
-            label={texts.es.langs}
+            label={texts[langStorage].langs}
             options={langsOptions}
             selected={{ label: langs[langStorage], value: langStorage }}
             onSelect={(sel) => setLangStorage(sel?.value || 'es')}
           />
           <Select
             className="w-48"
-            label={texts.es.churches}
+            label={texts[langStorage].churches}
             options={churchList.map((val) => ({
               label: capitalize(val),
               value: val,
