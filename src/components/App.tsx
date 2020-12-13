@@ -13,11 +13,11 @@ function App() {
     <DbContext.Provider value={database}>
       <BrowserRouter>
         <Switch>
+          <Route path="/user/:phone">
+            <User />
+          </Route>
           <Route path="/booking">
             <Booking />
-          </Route>
-          <Route path="/user">
-            <User />
           </Route>
           <Route path="/cancel">
             <Cancel />

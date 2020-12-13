@@ -9,6 +9,9 @@ interface Translations {
   phone: string;
   companions: string;
   limit: string;
+  newUser: string;
+  firstname: string;
+  lastname: string;
 }
 
 export const es: Translations = {
@@ -22,4 +25,7 @@ export const es: Translations = {
   phone: 'Número telefonico',
   companions: 'Número de acompañantes',
   limit: 'Cupos ocupados en',
+  newUser: 'El número telefónico no tiene datos asociados',
+  firstname: 'Nombre',
+  lastname: 'Apellido',
 };
