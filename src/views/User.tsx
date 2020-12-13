@@ -27,51 +27,53 @@ export default function User() {
   });
 
   return (
-    <Layout subtitle={texts.es.newUser}>
-      <div className="flex justify-between">
-        <Input
-          name="firstname"
-          label={texts.es.firstname}
-          value={form.firstname.value}
-          error={form.firstname.error}
-          onChange={(e) => {
-            const { value } = e.currentTarget;
-            const error = !value ? 'Nombre es necesario' : undefined;
-            setForm({ ...form, firstname: { value, error } });
-          }}
-        />
-        <Input
-          name="lastname"
-          label={texts.es.lastname}
-          value={form.lastname.value}
-          error={form.lastname.error}
-          onChange={(e) => {
-            const { value } = e.currentTarget;
-            const error = !value ? 'Nombre es necesario' : undefined;
-            setForm({ ...form, lastname: { value, error } });
-          }}
-        />
-      </div>
-      <div className="flex justify-between">
-        <Button
-          text={texts.es.cancel}
-          onClick={() => history.push('/')}
-          color="danger"
-        />
-        <Button
-          text={texts.es.verify}
-          onClick={async () => {
-            await user
-              .doc(phone)
-              .set({
-                firstname: form.firstname.value,
-                lastname: form.lastname.value,
-              });
-            history.push('/');
-          }}
-          color="success"
-        />
-      </div>
+    <Layout subtitle={(lang) => texts[lang].newUser}>
+      {(lang) => (
+        <>
+          <div className="flex justify-between">
+            <Input
+              name="firstname"
+              label={texts[lang].firstname}
+              value={form.firstname.value}
+              error={form.firstname.error}
+              onChange={(e) => {
+                const { value } = e.currentTarget;
+                const error = !value ? 'Nombre es necesario' : undefined;
+                setForm({ ...form, firstname: { value, error } });
+              }}
+            />
+            <Input
+              name="lastname"
+              label={texts[lang].lastname}
+              value={form.lastname.value}
+              error={form.lastname.error}
+              onChange={(e) => {
+                const { value } = e.currentTarget;
+                const error = !value ? 'Nombre es necesario' : undefined;
+                setForm({ ...form, lastname: { value, error } });
+              }}
+            />
+          </div>
+          <div className="flex justify-between">
+            <Button
+              text={texts[lang].cancel}
+              onClick={() => history.push('/')}
+              color="danger"
+            />
+            <Button
+              text={texts[lang].verify}
+              onClick={async () => {
+                await user.doc(phone).set({
+                  firstname: form.firstname.value,
+                  lastname: form.lastname.value,
+                });
+                history.push('/');
+              }}
+              color="success"
+            />
+          </div>
+        </>
+      )}
     </Layout>
   );
 }

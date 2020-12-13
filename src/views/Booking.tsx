@@ -55,71 +55,80 @@ export default function Booking() {
     companions: { value: 1 },
   });
 
-  const subtitle = `${texts.es.limit} ${capitalize(limits.name)}: ${
-    limits.current
-  }/${limits.limit}`;
   return (
-    <Layout subtitle={subtitle}>
-      <div className="flex justify-between">
-        <Input
-          type="number"
-          name="phone"
-          label={texts.es.phone}
-          value={form.phone.value}
-          error={form.phone.error}
-          onChange={(e) => {
-            const { value } = e.currentTarget;
-            const error = value.length > 12 ? 'Número muy largo' : undefined;
-            setForm({ ...form, phone: { value, error } });
-          }}
-        />
-        <Input
-          type="number"
-          name="companions"
-          label={texts.es.companions}
-          value={form.companions.value}
-          error={form.companions.error}
-          onChange={(e) => {
-            const value = Number(e.currentTarget.value);
-            const maxError = value > 5 ? 'Máximo 5 acompañantes' : undefined;
-            const minError = value < 1 ? 'Número muy pequeño' : undefined;
-            setForm({
-              ...form,
-              companions: { value, error: maxError || minError },
-            });
-          }}
-        />
-      </div>
-      <div className="flex justify-between">
-        <Button
-          text={texts.es.cancel}
-          onClick={() => history.push('/')}
-          color="danger"
-        />
-        <Button
-          text={texts.es.verify}
-          onClick={async () => {
-            const churchStorage = getChurch();
-            const date = new Date().toLocaleDateString('fr-CH');
-            const current = await place.doc(date).get();
-            const data = current.data() || {};
-            const churchData = data[churchStorage] || [];
-            const formData = {
-              phone: form.phone.value,
-              companions: form.companions.value,
-            };
-            const newData = {
-              ...data,
-              [churchStorage]: [...churchData, formData],
-            };
-            await place.doc(date).set(newData);
+    <Layout
+      subtitle={(lang) =>
+        `${texts[lang].limit} ${capitalize(limits.name)}: ${limits.current}/${
+          limits.limit
+        }`
+      }
+    >
+      {(lang) => (
+        <>
+          <div className="flex justify-between">
+            <Input
+              type="number"
+              name="phone"
+              label={texts[lang].phone}
+              value={form.phone.value}
+              error={form.phone.error}
+              onChange={(e) => {
+                const { value } = e.currentTarget;
+                const error =
+                  value.length > 12 ? 'Número muy largo' : undefined;
+                setForm({ ...form, phone: { value, error } });
+              }}
+            />
+            <Input
+              type="number"
+              name="companions"
+              label={texts[lang].companions}
+              value={form.companions.value}
+              error={form.companions.error}
+              onChange={(e) => {
+                const value = Number(e.currentTarget.value);
+                const maxError =
+                  value > 5 ? 'Máximo 5 acompañantes' : undefined;
+                const minError = value < 1 ? 'Número muy pequeño' : undefined;
+                setForm({
+                  ...form,
+                  companions: { value, error: maxError || minError },
+                });
+              }}
+            />
+          </div>
+          <div className="flex justify-between">
+            <Button
+              text={texts[lang].cancel}
+              onClick={() => history.push('/')}
+              color="danger"
+            />
+            <Button
+              text={texts[lang].verify}
+              onClick={async () => {
+                const churchStorage = getChurch();
+                const date = new Date().toLocaleDateString('fr-CH');
+                const current = await place.doc(date).get();
+                const data = current.data() || {};
+                const churchData = data[churchStorage] || [];
+                const formData = {
+                  phone: form.phone.value,
+                  companions: form.companions.value,
+                };
+                const newData = {
+                  ...data,
+                  [churchStorage]: [...churchData, formData],
+                };
+                await place.doc(date).set(newData);
 
-            const currUser = await user.doc(form.phone.value).get();
-            history.push(currUser.exists ? '/' : '/user');
-          }}
-          color="success"
-        />
-      </div>
+                const currUser = await user.doc(form.phone.value).get();
+                history.push(currUser.exists ? '/' : '/user');
+              }}
+              color="success"
+            />
+          </div>
+        </>
+      )}
     </Layout>
   );
 }
