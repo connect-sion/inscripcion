@@ -14,11 +14,12 @@ import {
 } from '../utils/utils';
 
 interface LayoutProps {
-  subtitle?: string;
-  children: ReactNode | ReactNode[];
+  subtitle?: (lang: Langs) => string;
+  children: (lang: Langs) => ReactNode | ReactNode[];
 }
 
-const langs: Record<string, string> = {
+type Langs = 'es' | 'pr' | 'en' | 'fr' | 'de' | 'it';
+const langs: Record<Langs, string> = {
   es: 'Español',
   pr: 'Portugues',
   en: 'English',
@@ -46,7 +47,7 @@ export default function Layout({ subtitle, children }: LayoutProps) {
 
   // Read language from state
   const langsOptions = optionsFromObj(langs);
-  const [langStorage, setLangStorage] = useState(getLang);
+  const [langStorage, setLangStorage] = useState<Langs>(getLang);
   useEffect(() => {
     setLang(langStorage);
   }, [langStorage]);
@@ -96,7 +97,7 @@ export default function Layout({ subtitle, children }: LayoutProps) {
         </div>
 
         {/* Main content */}
-        {children}
+        {children(langStorage)}
       </div>
     </div>
   );

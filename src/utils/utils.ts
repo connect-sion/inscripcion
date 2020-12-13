@@ -1,4 +1,4 @@
-export function optionsFromObj(obj: Record<string, string>) {
+export function optionsFromObj<T extends string>(obj: Record<T, string>) {
   let options = [];
   for (const key in obj) {
     options.push({ label: obj[key], value: key });
@@ -17,8 +17,9 @@ export function setChurch(curch: string) {
   localStorage.setItem('churchStorage', curch);
 }
 
-export function getLang() {
-  return localStorage.getItem('langStorage') || 'es';
+type Langs = 'es' | 'pr' | 'en' | 'fr' | 'de' | 'it';
+export function getLang(): Langs {
+  return (localStorage.getItem('langStorage') as Langs) || 'es';
 }
 export function setLang(lang: string) {
   localStorage.setItem('langStorage', lang);

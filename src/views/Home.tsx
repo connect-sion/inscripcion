@@ -9,23 +9,25 @@ export default function Home() {
   let history = useHistory();
   return (
     <Layout>
-      <div className="flex justify-between">
-        <Button
-          text={texts.es.booking}
-          onClick={() => history.push('/booking')}
-          color="primary"
-        />
-        <Button
-          text={texts.es.verify}
-          onClick={() => history.push('/verify')}
-          color="success"
-        />
-        <Button
-          text={texts.es.cancel}
-          onClick={() => history.push('/cancel')}
-          color="danger"
-        />
-      </div>
+      {(lang) => (
+        <div className="flex justify-between">
+          <Button
+            text={texts[lang].booking}
+            onClick={() => history.push('/booking')}
+            color="primary"
+          />
+          <Button
+            text={texts[lang].verify}
+            onClick={() => history.push('/verify')}
+            color="success"
+          />
+          <Button
+            text={texts[lang].cancel}
+            onClick={() => history.push('/cancel')}
+            color="danger"
+          />
+        </div>
+      )}
     </Layout>
   );
 }
