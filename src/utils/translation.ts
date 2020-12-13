@@ -12,6 +12,9 @@ interface Translations {
   newUser: string;
   firstname: string;
   lastname: string;
+  userNotFound: string;
+  correct: (places: number) => string;
+  return: string;
 }
 
 export const es: Translations = {
@@ -28,4 +31,7 @@ export const es: Translations = {
   newUser: 'El número telefónico no tiene datos asociados',
   firstname: 'Nombre',
   lastname: 'Apellido',
+  userNotFound: 'El teléfono no está registrado para esta fecha',
+  correct: (places) => `Tiene separados ${places} puestos para esta fecha`,
+  return: 'Regresar',
 };
